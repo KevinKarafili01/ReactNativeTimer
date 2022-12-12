@@ -1,20 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-export default function App() {
+const Timer = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+    if (isRunning) {
+      interval = setInterval(() => {
+        setSeconds((seconds) => seconds + 1);
+      }, 1000);
+    } else if (!isRunning || isPaused) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isRunning, isPaused, seconds]);
+
+  const handleStart = () => {
+    setIsRunning(true);
+  };
+
+  const handleStop = () => {
+    setIsRunning(false);
+  };
+
+  
+
+  const handleReset = () => {
+    setSeconds(0);
+    setIsRunning(false);
+    setIsPaused(false);
+  };
+
+  const style = StyleSheet.create({
+    container: {
+      marginTop: 50
+    },
+    startButton: {
+      
+    }
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={style.container}>
+      <Text >{seconds} seconds</Text>
+      <Button title="Start" onPress={handleStart} />
+      <Button title="Stop" onPress={handleStop} />
+      <Button title="Reset" onPress={handleReset} />
     </View>
   );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+};
+
+export default Timer;
