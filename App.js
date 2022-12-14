@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native';
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(0);
@@ -36,19 +38,75 @@ const Timer = () => {
 
   const style = StyleSheet.create({
     container: {
-      marginTop: 50
-    },
-    startButton: {
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: '#000'
       
+    },
+    sizeofText: {
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 30
+      
+    },
+    styleButton: {
+      borderRadius: 10
+    },
+    buttonTextStart: {
+      color: '#90EE90',
+      borderWidth: 1,
+      borderRadius: 100,
+      borderColor: '#33a532',
+      fontSize: 20,
+      padding: 10,
+      left: 100,
+      top: 50,
+      fontWeight: 'bold',
+      backgroundColor: '#33a532',
+      
+      
+    },
+    buttonTextStop: {
+      color: '#FFCCCB',
+      borderWidth: 1,
+      borderRadius: 100,
+      borderColor: '#bb1e10',
+      fontSize: 20,
+      padding: 10,
+      right: 100,
+      fontWeight: 'bold',
+      backgroundColor: '#bb1e10'
+      
+    },
+
+    buttonReset: {
+      color: '#D3D3D3',
+      borderWidth: 1,
+      borderRadius: 100,
+      borderColor: '#5A5A5A',
+      fontSize: 20,
+      padding: 10,
+      right: 100,
+      fontWeight: 'bold',
+      backgroundColor: '#5A5A5A',
+      left: 0
     }
+
+
+    
+
   });
 
   return (
     <View style={style.container}>
-      <Text >{seconds} seconds</Text>
-      <Button title="Start" onPress={handleStart} />
-      <Button title="Stop" onPress={handleStop} />
-      <Button title="Reset" onPress={handleReset} />
+      <Text style={style.sizeofText}>{seconds} seconds</Text>
+      <TouchableOpacity style={style.styleButton} onPress={handleStart}><Text style={style.buttonTextStart}>Start</Text></TouchableOpacity>
+      <TouchableOpacity style={style.styleButton} onPress={handleStop}><Text style={style.buttonTextStop}>Stop</Text></TouchableOpacity>
+      <TouchableOpacity style={style.styleButton} onPress={handleReset}><Text style={style.buttonReset}>Reset</Text></TouchableOpacity>
+     
+      
+      
     </View>
   );
 
